@@ -18,48 +18,38 @@ const CartItem = ({ item }) => {
   };
 
   return (
-    <div className="p-3 shadow-md border rounded-md bg-white">
+    <div className="p-2 shadow border rounded bg-white text-xs">
       <div className="flex items-center">
         {/* Product Image */}
-        <div className="w-[4rem] h-[4rem] lg:w-[6rem] lg:h-[6rem]">
+        <div className="w-[3.5rem] h-[3.5rem] lg:w-[5rem] lg:h-[5rem]">
           <img
-            className="w-full h-full object-cover object-top"
+            className="w-full h-full object-cover object-top rounded"
             src={item.image}
             alt={item.name}
           />
         </div>
 
         {/* Product Info */}
-        <div className="ml-4 flex-1 space-y-1">
+        <div className="ml-3 flex-1 space-y-0.5">
           <p className="font-medium text-sm">{item.name}</p>
-          <p className="opacity-70 text-xs">{item.description}</p>
+          <p className="text-gray-500 text-[11px] leading-tight">{item.description}</p>
 
-          <div className="flex space-x-4 items-center text-base text-gray-900 pt-2">
+          <div className="flex space-x-2 items-center text-[13px] text-gray-900 pt-1">
             <p className="font-semibold">₹{item.price}</p>
-            <p className="opacity-50 line-through text-sm">₹{item.originalPrice}</p>
-            <p className="text-green-600 font-semibold text-sm">{item.discount}</p>
+            <p className="line-through text-gray-400 text-[11px]">₹{item.originalPrice}</p>
+            <p className="text-green-600 font-medium text-[11px]">{item.discount}</p>
           </div>
 
           {/* Quantity & Remove */}
-          <div className="flex items-center space-x-3 pt-2">
-            <div className="flex items-center border px-1 py-0.5 rounded-md space-x-2">
-              <button
-                onClick={handleDecrease}
-                className="text-base text-gray-600 hover:text-black"
-              >
-                −
-              </button>
-              <span className="min-w-[1rem] text-center text-sm">{item.quantity}</span>
-              <button
-                onClick={handleIncrease}
-                className="text-base text-gray-600 hover:text-black"
-              >
-                +
-              </button>
+          <div className="flex items-center space-x-2 pt-1">
+            <div className="flex items-center border px-1 py-0.5 rounded space-x-1 text-[13px]">
+              <button onClick={handleDecrease} className="hover:text-black">−</button>
+              <span className="w-4 text-center">{item.quantity}</span>
+              <button onClick={handleIncrease} className="hover:text-black">+</button>
             </div>
             <button
               onClick={() => removeFromCart(item)}
-              className="text-xs text-purple-600 font-medium hover:underline"
+              className="text-purple-600 hover:underline text-[11px]"
             >
               REMOVE
             </button>

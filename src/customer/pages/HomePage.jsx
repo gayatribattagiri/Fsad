@@ -7,6 +7,7 @@ import electronics from '../../Data/electronics'
 import cosmetics from '../../Data/cosmetics'
 import decoratives from '../../Data/decoratives'
 import dailyneeds from '../../Data/dailyneeds'
+import cleaners from '../../Data/cleaners'
 export default function HomePage() {
   return (
     <div>
@@ -17,6 +18,7 @@ export default function HomePage() {
         <HomeSectionCarosel data={cosmetics} sectionName={"cosmetics"} />
         <HomeSectionCarosel data={electronics} sectionName={"electronics"} />
         <HomeSectionCarosel data={decoratives} sectionName={"decoratives"} />
+        <HomeSectionCarosel data={cleaners} sectionName={"cleaners"} />
       </div>
     </div>
   )

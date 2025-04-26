@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef } from 'react';
 import HomeSectionCard from '../HomeSectionCard/HomeSectionCard';
 import AliceCarousel from "react-alice-carousel";
 import "react-alice-carousel/lib/alice-carousel.css";
@@ -6,17 +6,25 @@ import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import { Button } from '@mui/material';
 
 const HomeSectionCarosel = ({ data, sectionName }) => {
-  const [activeIndex, setActiveIndex] = useState(0);
+  const carouselRef = useRef(null);
 
   const responsive = {
     0: { items: 1 },
     720: { items: 3 },
-    1024: { items: 5.5 },
+    1024: { items: 6},
   };
 
-  const slidePrev = () => setActiveIndex(activeIndex - 1);
-  const slideNext = () => setActiveIndex(activeIndex + 1);
-  const syncActiveIndex = ({ item }) => setActiveIndex(item);
+  const slidePrev = () => {
+    if (carouselRef.current) {
+      carouselRef.current.slidePrev(); // USE THIS
+    }
+  };
+
+  const slideNext = () => {
+    if (carouselRef.current) {
+      carouselRef.current.slideNext(); // USE THIS
+    }
+  };
 
   const items = data.map((item, index) => (
     <div key={index} className="flex justify-center mx-4">
@@ -24,7 +32,7 @@ const HomeSectionCarosel = ({ data, sectionName }) => {
         name={item.name}
         description={item.description}
         image={item.image}
-        category={sectionName.toLowerCase()} // Pass category here
+        category={sectionName.toLowerCase()}
       />
     </div>
   ));
@@ -34,43 +42,43 @@ const HomeSectionCarosel = ({ data, sectionName }) => {
       <h2 className="text-2xl font-semibold text-gray-800 py-4 capitalize">{sectionName}</h2>
       <div className="relative p-5 border">
         <AliceCarousel
+          ref={carouselRef}
           items={items}
-          infinite
           disableButtonsControls
           disableDotsControls
           responsive={responsive}
-          onSlideChanged={syncActiveIndex}
-          activeIndex={activeIndex}
+          infinite
         />
-        {activeIndex !== items.length - 4 && (
-          <Button
-            variant='contained'
-            className="z-50 bg-white"
-            onClick={slideNext}
-            sx={{
-              position: 'absolute',
-              top: "8rem",
-              right: "0rem",
-              transform: "translateX(50%) rotate(90deg)",
-              bgcolor: "white"
-            }}
-            aria-label='next'
-          >
-            <KeyboardArrowLeftIcon sx={{ transform: "rotate(+90deg)", color: 'black' }} />
-          </Button>
-        )}
+        {/* Right Button */}
         <Button
-          variant='contained'
+          variant="contained"
+          className="z-50 bg-white"
+          onClick={slideNext}
+          sx={{
+            position: 'absolute',
+            top: "7rem",
+            right: "0rem",
+            transform: "translateX(50%) rotate(90deg)",
+            bgcolor: "white",
+          }}
+          aria-label="next"
+        >
+          <KeyboardArrowLeftIcon sx={{ transform: "rotate(+90deg)", color: 'black' }} />
+        </Button>
+
+        {/* Left Button */}
+        <Button
+          variant="contained"
           className="z-50 bg-white"
           onClick={slidePrev}
           sx={{
             position: 'absolute',
-            top: "8rem",
+            top: "7rem",
             left: "0rem",
             transform: "translateX(-50%) rotate(90deg)",
-            bgcolor: "white"
+            bgcolor: "white",
           }}
-          aria-label='prev'
+          aria-label="prev"
         >
           <KeyboardArrowLeftIcon sx={{ transform: "rotate(-90deg)", color: 'black' }} />
         </Button>

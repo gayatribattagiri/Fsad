@@ -36,7 +36,8 @@ const Cart = () => {
       </div>
 
       {/* Price Details Section */}
-      <div className="bg-white shadow-lg rounded-md p-6 h-fit">
+      <div className="bg-white border border-[#7fb0d6] shadow-md rounded-md p-6 h-fit">
+
         <h2 className="text-lg font-semibold mb-4">PRICE DETAILS</h2>
         <div className="space-y-3 text-sm">
           <div className="flex justify-between">
@@ -61,11 +62,16 @@ const Cart = () => {
         </div>
 
         <button
-          onClick={handleCheckout}
-          className="mt-6 w-full bg-purple-600 text-white py-2 rounded-md font-semibold hover:bg-purple-700 transition"
-        >
-          CHECK OUT
-        </button>
+  onClick={handleCheckout}
+  className="mt-6 w-full py-3 text-center text-lg font-semibold bg-gradient-to-r from-[#7fb0d6] to-[#d4e5f2] text-gray-800 rounded-lg hover:from-[#6aa1c8] hover:to-[#c0d9ea] shadow-md"
+>
+  CHECK OUT
+</button>
+
+
+
+
+
       </div>
     </div>
   );

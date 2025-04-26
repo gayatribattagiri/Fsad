@@ -9,7 +9,7 @@ const Footer = () => {
         className='bg-black text-white text-center mt-10'
         container
         spacing={30} // Adjusted spacing for better alignment
-        sx={{ bgcolor: 'black', color: 'white', py: 3 }}
+        sx={{ bgcolor: '#253640', color: 'white', py: 3 }}
       >
         <Grid item xs={12} sm={6} md={3}>
           <Typography className='pb-5' variant='h6'>
@@ -124,7 +124,7 @@ const Footer = () => {
           textAlign: 'center', // Center align text
           pt: 3 ,
           pb: 5,
-          bgcolor:'black',
+          bgcolor:'#1c2b33',
           color:'white',
         
         }}

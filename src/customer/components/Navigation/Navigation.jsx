@@ -7,7 +7,6 @@ import {
   XMarkIcon,
 } from "@heroicons/react/24/outline";
 import { Avatar, Button, Menu, MenuItem } from "@mui/material";
-import { deepPurple } from "@mui/material/colors";
 import { navigation } from "./NavigationData";
 import { useNavigate } from "react-router-dom";
 
@@ -21,7 +20,6 @@ export default function Navigation() {
   const [openAuthModal, setOpenAuthModal] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
   const openUserMenu = Boolean(anchorEl);
-  const jwt = localStorage.getItem("jwt");
 
   const handleUserClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -34,13 +32,10 @@ export default function Navigation() {
   const handleOpen = () => setOpenAuthModal(true);
   const handleClose = () => setOpenAuthModal(false);
 
-  // 🔁 Updated to direct all section item clicks to /products
   const handleCategoryClick = (categoryId) => {
     navigate(`/products/${categoryId}`);
-    setOpen(false); // Closes the mobile menu
+    setOpen(false);
   };
-  
-  
 
   return (
     <div className="bg-white pb-10">
@@ -118,12 +113,11 @@ export default function Navigation() {
                                 />
                               </div>
                               <p
-  onClick={() => handleCategoryClick(category.id)}
-  className="block mt-2 font-medium text-gray-900 cursor-pointer"
->
-  {item.name}
-</p>
-
+                                onClick={() => handleCategoryClick(category.id)}
+                                className="block mt-2 font-medium text-gray-900 cursor-pointer"
+                              >
+                                {item.name}
+                              </p>
                               <p className="text-sm text-gray-500">Shop now</p>
                             </div>
                           ))}
@@ -136,7 +130,7 @@ export default function Navigation() {
                               {section.items.map((item) => (
                                 <li key={item.name} className="flow-root">
                                   <p
-                                    onClick={handleCategoryClick}
+                                    onClick={() => handleCategoryClick(category.id)}
                                     className="cursor-pointer p-2 text-gray-500 hover:text-gray-800"
                                   >
                                     {item.name}
@@ -170,13 +164,12 @@ export default function Navigation() {
 
       {/* Desktop navigation */}
       <header className="relative bg-white">
-      <p className="flex h-12 items-center justify-center bg-gradient-to-r from-green-200 via-emerald-100 to-green-200 px-4 text-base font-semibold text-[#1f2937] tracking-wide shadow-sm">
-  Freshness Delivered, Happiness Guaranteed!
-</p>
-
+        <p className="flex h-12 items-center justify-center bg-gradient-to-r from-[#7fb0d6] via-[#aacbe4] to-[#d4e5f2] text-[#1f2937] tracking-wide shadow-md">
+          Freshness Delivered, Happiness Guaranteed!
+        </p>
 
         <nav className="mx-auto">
-          <div className="border-b border-gray-200">
+          <div className="border-b border-[#7fb0d6]">
             <div className="flex h-16 items-center px-4">
               <button
                 type="button"
@@ -188,16 +181,15 @@ export default function Navigation() {
 
               {/* Logo */}
               <div
-  onClick={() => navigate("/")}
-  className="ml-4 flex lg:ml-0 cursor-pointer"
->
-  <img
-    alt="Your Company"
-    src="./images/logo.png"
-    className="h-8 w-auto"
-  />
-</div>
-
+                onClick={() => navigate("/")}
+                className="ml-4 flex lg:ml-0 cursor-pointer"
+              >
+                <img
+                  alt="Your Company"
+                  src="./images/logo.png"
+                  className="h-8 w-auto"
+                />
+              </div>
 
               {/* Categories */}
               <div className="hidden lg:ml-8 lg:block lg:self-stretch">
@@ -218,28 +210,32 @@ export default function Navigation() {
                         leaveTo="opacity-0 translate-y-1"
                       >
                         <Popover.Panel className="absolute left-0 z-10 mt-3 w-screen max-w-md px-2 sm:px-0">
-                          <div className="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 overflow-hidden">
-                            <div className="relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8">
-                              {category.sections.map((section) => (
-                                <div key={section.name}>
-                                  <p className="font-medium text-gray-900">{section.name}</p>
-                                  <ul className="mt-2 space-y-2">
-                                    {section.items.map((item) => (
-                                      <li key={item.name}>
-                                        <p
-                                         onClick={() => handleCategoryClick(category.id)}
-
-                                          className="cursor-pointer text-gray-600 hover:text-gray-800"
-                                        >
-                                          {item.name}
-                                        </p>
-                                      </li>
-                                    ))}
-                                  </ul>
-                                </div>
-                              ))}
+                          {({ close }) => (
+                            <div className="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 overflow-hidden">
+                              <div className="relative grid gap-6 bg-gradient-to-r from-[#7fb0d6] to-[#d4e5f2] px-5 py-6 sm:gap-8 sm:p-8">
+                                {category.sections.map((section) => (
+                                  <div key={section.name}>
+                                    <p className="font-medium text-gray-900">{section.name}</p>
+                                    <ul className="mt-2 space-y-2">
+                                      {section.items.map((item) => (
+                                        <li key={item.name}>
+                                          <p
+                                            onClick={() => {
+                                              handleCategoryClick(category.id);
+                                              close();
+                                            }}
+                                            className="cursor-pointer text-gray-600 hover:text-gray-800"
+                                          >
+                                            {item.name}
+                                          </p>
+                                        </li>
+                                      ))}
+                                    </ul>
+                                  </div>
+                                ))}
+                              </div>
                             </div>
-                          </div>
+                          )}
                         </Popover.Panel>
                       </Transition>
                     </Popover>
@@ -247,28 +243,28 @@ export default function Navigation() {
                 </div>
               </div>
 
+              {/* Right icons */}
               <div className="ml-auto flex items-center space-x-4">
-                {/* Auth */}
+                {/* Custom Avatar */}
                 <>
-  <Avatar
-    sx={{ bgcolor: deepPurple[500], cursor: "pointer" }}
-    onClick={handleUserClick}
-  >
-    R
-  </Avatar>
-  <Menu
-    id="user-menu"
-    anchorEl={anchorEl}
-    open={openUserMenu}
-    onClose={handleCloseUserMenu}
-  >
-    <MenuItem onClick={handleCloseUserMenu}>Profile</MenuItem>
-    <MenuItem onClick={handleCloseUserMenu}>
-    <Button onClick={()=>navigate("/account/order")}>My Orders</Button></MenuItem>
-    <MenuItem onClick={handleCloseUserMenu}>Logout</MenuItem>
-  </Menu>
-</>
-
+                  <Avatar
+                    src="/images/user.png"
+                    sx={{ cursor: "pointer", width: 40, height: 40 }}
+                    onClick={handleUserClick}
+                  />
+                  <Menu
+                    id="user-menu"
+                    anchorEl={anchorEl}
+                    open={openUserMenu}
+                    onClose={handleCloseUserMenu}
+                  >
+                    <MenuItem onClick={handleCloseUserMenu}>Profile</MenuItem>
+                    <MenuItem onClick={handleCloseUserMenu}>
+                      <Button onClick={() => navigate("/account/order")}>My Orders</Button>
+                    </MenuItem>
+                    <MenuItem onClick={handleCloseUserMenu}>Logout</MenuItem>
+                  </Menu>
+                </>
 
                 {/* Search */}
                 <button className="p-2 text-gray-400 hover:text-gray-500">

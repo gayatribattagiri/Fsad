@@ -1,14 +1,13 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import farmfresh from '../../../Data/farmfresh';
-
-import ProductReviewCard from './ProductReviewCard';
-import { StarIcon } from '@heroicons/react/20/solid';
-import { useCart } from '../context/CartContext';
 import cosmetics from '../../../Data/cosmetics';
 import electronics from '../../../Data/electronics';
 import decoratives from '../../../Data/decoratives';
 import cleaners from '../../../Data/cleaners';
 import dailyneeds from '../../../Data/dailyneeds';
+import { useCart } from '../context/CartContext';
+import ProductReviewCard from './ProductReviewCard';
+import { StarIcon } from '@heroicons/react/20/solid';
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
@@ -38,97 +37,80 @@ export default function ProductDetails() {
   const reviews = { href: '#', average: 4, totalCount: 23 };
 
   const handleAddtoCart = () => {
-    addToCart({ ...product, category }); // ✅ Add category to product
+    addToCart({ ...product, category });
     navigate('/cart');
   };
 
   const formatPrice = (price) => `₹${price.toLocaleString('en-IN')}`;
 
   return (
-    <div className="bg-white">
-      <div className="pt-6">
-        {/* Breadcrumb */}
-        <nav aria-label="Breadcrumb">
-          <ol className="mx-auto flex max-w-2xl items-center space-x-2 px-4 sm:px-6 lg:max-w-7xl lg:px-8">
-            <li>
-              <div className="flex items-center">
-                <a href="#" className="mr-2 text-sm font-medium text-gray-900">
-                  {category.charAt(0).toUpperCase() + category.slice(1)}
-                </a>
-              </div>
-            </li>
-            <li className="text-sm">
-              <span className="font-medium text-gray-500">{product.name}</span>
-            </li>
-          </ol>
-        </nav>
+    <div className="bg-white min-h-screen relative">
+      {/* Blue Shadow Strip at top */}
+      <div className="absolute top-0 left-0 w-full h-10 shadow-md" style={{ boxShadow: '0 4px 20px rgba(56, 189, 248, 0.5)' }} />
 
-        {/* Layout */}
-        <section className="grid grid-cols lg:grid-cols-2 gap-x-8 gap-y-10 px-4 pt-10">
-          {/* Image */}
-          <div className="flex flex-col items-center">
-            <div className="overflow-hidden rounded-lg max-w-[30rem] max-h-[35rem]">
-              <img
-                alt={product.name}
-                src={product.image}
-                className="size-full rounded-lg object-cover"
-              />
-            </div>
+      {/* Main Content */}
+      <div className="relative py-12 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          {/* Left Side Image */}
+          <div className="flex justify-center">
+            <img
+              src={product.image}
+              alt={product.name}
+              className="h-[400px] w-[400px] object-contain"
+            />
           </div>
 
-          {/* Product Info */}
-          <div className="mx-auto max-w-2xl px-4 pt-10 pb-16 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:grid-rows-[auto_auto_1fr] lg:gap-x-8 lg:px-8 lg:pt-16 lg:pb-24">
-            <div className="lg:col-span-2 lg:border-r lg:border-gray-200 lg:pr-8">
-              <h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
-                {product.name}
-              </h1>
+          {/* Right Side Content */}
+          <div className="flex flex-col gap-6 border-l border-gray-300 pl-12">
+            {/* Product Title */}
+            <h1 className="text-3xl font-bold text-gray-900">{product.name}</h1>
+
+            {/* Product Description */}
+            <p className="text-gray-700 text-lg">{product.description}</p>
+
+            {/* Pricing */}
+            <div className="flex flex-col gap-1">
+              <p className="text-2xl font-bold text-gray-900">{formatPrice(product.price)}</p>
+              <div className="flex gap-2 items-center">
+                <p className="text-sm line-through text-gray-400">{formatPrice(product.originalPrice)}</p>
+                <p className="text-sm text-blue-600">{product.discount}</p>
+              </div>
             </div>
 
-            <div className="mt-4 lg:row-span-3 lg:mt-0">
-              <p className="text-3xl tracking-tight text-gray-900">{formatPrice(product.price)}</p>
-              <p className="text-sm text-gray-500 line-through">{formatPrice(product.originalPrice)}</p>
-              <p className="text-sm text-green-600">{product.discount}</p>
-
-              {/* Reviews */}
-              <div className="mt-6">
-                <div className="flex items-center">
-                  {[0, 1, 2, 3, 4].map((rating) => (
-                    <StarIcon
-                      key={rating}
-                      className={classNames(
-                        reviews.average > rating ? 'text-gray-900' : 'text-gray-200',
-                        'size-5 shrink-0'
-                      )}
-                      aria-hidden="true"
-                    />
-                  ))}
-                  <a
-                    href={reviews.href}
-                    className="ml-3 text-sm font-medium text-indigo-600 hover:text-indigo-500"
-                  >
-                    {reviews.totalCount} reviews
-                  </a>
-                </div>
-              </div>
-
-              {/* Add to cart */}
-              <button
-                onClick={handleAddtoCart}
-                type="button"
-                className="mt-10 flex w-full justify-center rounded-md bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700"
+            {/* Reviews */}
+            <div className="flex items-center gap-2">
+              {[0, 1, 2, 3, 4].map((rating) => (
+                <StarIcon
+                  key={rating}
+                  className={classNames(
+                    reviews.average > rating ? 'text-blue-500' : 'text-gray-200',
+                    'h-5 w-5'
+                  )}
+                  aria-hidden="true"
+                />
+              ))}
+              <a
+                href={reviews.href}
+                className="text-sm font-medium text-blue-600 hover:text-blue-500"
               >
-                Add to bag
-              </button>
+                {reviews.totalCount} reviews
+              </a>
             </div>
 
-            <div className="py-10 lg:col-span-2 lg:col-start-1 lg:border-r lg:border-gray-200 lg:pt-6 lg:pr-8">
-              <div className="space-y-6">
-                <p className="text-base text-gray-900">{product.description}</p>
-              </div>
-            </div>
+            {/* Add to Bag Button */}
+            <button
+              onClick={handleAddtoCart}
+              className="mt-6 w-[200px] py-3 text-center text-lg font-semibold bg-gradient-to-r from-[#7fb0d6] to-[#d4e5f2] text-gray-800 rounded-lg hover:from-[#6aa1c8] hover:to-[#c0d9ea] shadow-md"
+            >
+              Add to Bag
+            </button>
           </div>
-        </section>
-        <ProductReviewCard />
+        </div>
+
+        {/* Reviews Card Below */}
+        <div className="mt-16">
+          <ProductReviewCard />
+        </div>
       </div>
     </div>
   );

@@ -56,10 +56,13 @@ const OrderSummary = () => {
               ₹{cartItems.reduce((total, item) => total + Number(item.price) * item.quantity, 0)}
             </span>
           </div>
-
-          <button className="mt-6 w-full bg-purple-600 text-white py-2 rounded-md font-semibold hover:bg-purple-700 transition">
-            Payment
-          </button>
+          <button
+    
+    className="mt-6 w-full py-3 text-center text-lg font-semibold bg-gradient-to-r from-[#7fb0d6] to-[#d4e5f2] text-gray-800 rounded-lg hover:from-[#6aa1c8] hover:to-[#c0d9ea] shadow-md"
+  >
+    Payment
+  </button>
+          
         </div>
       </div>
     </div>
