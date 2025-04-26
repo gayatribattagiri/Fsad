@@ -63,10 +63,16 @@ const Cart = () => {
 
         <button
   onClick={handleCheckout}
-  className="mt-6 w-full py-3 text-center text-lg font-semibold bg-gradient-to-r from-[#7fb0d6] to-[#d4e5f2] text-gray-800 rounded-lg hover:from-[#6aa1c8] hover:to-[#c0d9ea] shadow-md"
+  disabled={cartItems.length === 0}
+  className={`mt-6 w-full py-3 text-center text-lg font-semibold rounded-lg shadow-md ${
+    cartItems.length === 0
+      ? 'bg-gray-300 cursor-not-allowed text-gray-500'
+      : 'bg-gradient-to-r from-[#7fb0d6] to-[#d4e5f2] text-gray-800 hover:from-[#6aa1c8] hover:to-[#c0d9ea]'
+  }`}
 >
   CHECK OUT
 </button>
+
 
 
 
