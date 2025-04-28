@@ -40,7 +40,7 @@ const HomeSectionCarosel = ({ data, sectionName }) => {
   return (
     <div className="relative px-4 lg:px-8">
       <h2 className="text-2xl font-semibold text-gray-800 py-4 capitalize">{sectionName}</h2>
-      <div className="relative p-5 border">
+      <div className="relative p-5 border-2">
         <AliceCarousel
           ref={carouselRef}
           items={items}

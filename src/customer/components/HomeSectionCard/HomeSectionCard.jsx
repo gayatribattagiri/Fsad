@@ -12,10 +12,9 @@ const HomeSectionCard = ({ name, description, image, category }) => {
     <div
       onClick={handleClick}
 
-      className="cursor-pointer flex flex-col items-center bg-white rounded-xl shadow-md overflow-hidden w-[11rem] 
-      border border-blue-400 hover:border-blue-500 hover:shadow-[0_0_15px_#7fb0d6] transition-all duration-300 ease-in-out"
-    >
-    
+      className="cursor-pointer flex flex-col items-center bg-white rounded-xl shadow-md hover:shadow-2xl overflow-hidden w-[11rem]
+      border border-black transition-transform transition-shadow duration-300 hover:scale-105"
+  >
       <div className="h-[9rem] w-[8rem]">
         <img className="object-cover object-top w-full h-full" src={image} alt={name} />
       </div>

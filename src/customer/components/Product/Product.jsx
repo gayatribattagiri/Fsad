@@ -27,10 +27,8 @@ export default function Product() {
 
       {/* Content */}
       <div className="relative py-10 px-6">
-        <h2 className="text-2xl font-bold text-gray-900 mb-6">
-          {`Fresh ${categoryId.charAt(0).toUpperCase() + categoryId.slice(1)}`}
-        </h2>
-        <div className="flex flex-wrap justify-center">
+        
+        <div className="flex flex-wrap justify-center mt-9">
           {categoryData.map((item) => (
             <ProductCard key={item.id} product={item} />
           ))}

@@ -3,24 +3,35 @@ import { Dialog, Popover, Tab, Transition } from "@headlessui/react";
 import {
   Bars3Icon,
   MagnifyingGlassIcon,
-  ShoppingBagIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
 import { Avatar, Button, Menu, MenuItem } from "@mui/material";
 import { navigation } from "./NavigationData";
-import { useNavigate } from "react-router-dom";
 
+import { useNavigate, useLocation } from "react-router-dom"; // updated import
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
 export default function Navigation() {
   const [open, setOpen] = useState(false);
-  const navigate = useNavigate();
+
   const [openAuthModal, setOpenAuthModal] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
   const openUserMenu = Boolean(anchorEl);
 
+  // inside Navigation component
+  const navigate = useNavigate();
+  const location = useLocation(); // new
+  
+  const handleCartClick = () => {
+    if (location.pathname === "/cart") {
+      navigate(-1); // go back
+    } else {
+      navigate("/cart"); // go to cart
+    }
+  };
+  
   const handleUserClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -164,7 +175,7 @@ export default function Navigation() {
 
       {/* Desktop navigation */}
       <header className="relative bg-white">
-        <p className="flex h-12 items-center justify-center bg-gradient-to-r from-[#7fb0d6] via-[#aacbe4] to-[#d4e5f2] text-[#1f2937] tracking-wide shadow-md">
+        <p className="flex h-12 items-center justify-center font-semibold bg-gradient-to-r from-[#7fb0d6] via-[#aacbe4] to-[#d4e5f2] text-[#1f2937] tracking-wide shadow-md">
           Freshness Delivered, Happiness Guaranteed!
         </p>
 
@@ -187,16 +198,16 @@ export default function Navigation() {
                 <img
                   alt="Your Company"
                   src="./images/logo.png"
-                  className="h-8 w-auto"
+                  className="h-10 w-auto"
                 />
               </div>
 
               {/* Categories */}
               <div className="hidden lg:ml-8 lg:block lg:self-stretch">
-                <div className="flex h-full space-x-8">
+                <div className="flex h-full space-x-6">
                   {navigation.categories.map((category) => (
-                    <Popover key={category.name} className="relative">
-                      <Popover.Button className="flex items-center h-full text-sm font-medium text-gray-700 hover:text-gray-800">
+                    <Popover key={category.name} className="relative flex items-center">
+                      <Popover.Button className="flex items-center justify-center px-4 py-1 rounded-[20px] border-1 border-[#3e7089] bg-gradient-to-r from-[#7fb0d6] to-[#d4e5f2] text-sm font-medium text-gray-700 leading-none shadow-md hover:shadow-lg hover:text-gray-900">
                         {category.name}
                       </Popover.Button>
 
@@ -209,7 +220,7 @@ export default function Navigation() {
                         leaveFrom="opacity-100 translate-y-0"
                         leaveTo="opacity-0 translate-y-1"
                       >
-                        <Popover.Panel className="absolute left-0 z-10 mt-3 w-screen max-w-md px-2 sm:px-0">
+                        <Popover.Panel className="absolute left-0 z-10 mt-3 w-screen max-w-md px-2 sm:px-0 top-full">
                           {({ close }) => (
                             <div className="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 overflow-hidden">
                               <div className="relative grid gap-6 bg-gradient-to-r from-[#7fb0d6] to-[#d4e5f2] px-5 py-6 sm:gap-8 sm:p-8">
@@ -271,11 +282,13 @@ export default function Navigation() {
                   <MagnifyingGlassIcon className="h-6 w-6" aria-hidden="true" />
                 </button>
 
-                {/* Cart */}
-                <Button className="flex items-center space-x-2">
-                  <ShoppingBagIcon className="h-6 w-6 text-gray-400" />
-                  <span className="text-sm font-medium text-gray-700">2</span>
-                </Button>
+                {/* Cart Image */}
+                <img
+                  src="/images/cart.png"
+                  alt="Cart"
+                  onClick={handleCartClick} 
+                  className="h-9 w-9 cursor-pointer"
+                />
               </div>
             </div>
           </div>
