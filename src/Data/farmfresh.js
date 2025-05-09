@@ -12,7 +12,7 @@ const vegetables = [
     id: 2,
     name: "Carrots",
     description: "Organic orange carrots",
-    image: "/images/carrots.jpg",
+    image: "https://res.cloudinary.com/dkh7z7ouc/image/upload/v1746792258/carrots_aklfej.jpg",
     price: "39",
     originalPrice: "59",
     discount: "34% off"

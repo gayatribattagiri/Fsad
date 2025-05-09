@@ -1,152 +1,149 @@
-import { Button, Grid, Typography } from '@mui/material';
 import React from 'react';
-import { Link } from 'react-alice-carousel';
+import { Grid, Typography, Link, Box } from '@mui/material';
 
 const Footer = () => {
   return (
-    <div>
+    <Box sx={{ bgcolor: '#253640', color: 'white', mt: 10 }}>
+      {/* Main Footer Content Grid */}
       <Grid
-        className='bg-black text-white text-center mt-10'
         container
-        spacing={30} // Adjusted spacing for better alignment
-        sx={{ bgcolor: '#253640', color: 'white', py: 3 }}
+        spacing={3}
+        sx={{
+          px: { xs: 2, sm: 4, md: 10 },
+          py: 5,
+          display: 'flex',
+          justifyContent: 'center',
+        }}
       >
-        <Grid item xs={12} sm={6} md={3}>
-          <Typography className='pb-5' variant='h6'>
+        {/* Company Section */}
+        <Grid item xs={12} sm={6} md={3} sx={{ textAlign: { xs: 'center', sm: 'left' } }}>
+          <Typography
+            variant="h6"
+            sx={{
+              mb: 2,
+              fontSize: { xs: '0.6rem', sm: '1.2rem', md: '1.4rem' },
+              fontWeight: 'bold',
+            }}
+          >
             Company
           </Typography>
-          <div>
-            <Button className='pb-5' variant='h6' gutterbutton>
-              About
-            </Button>
-          </div>
-          <div>
-            <Button className='pb-5' variant='h6' gutterbutton>
-              Blog
-            </Button>
-          </div>
-          <div>
-            <Button className='pb-5' variant='h6' gutterbutton>
-              Press
-            </Button>
-          </div>
-          <div>
-            <Button className='pb-5' variant='h6' gutterbutton>
-              Jobs
-            </Button>
-          </div>
-          <div>
-            <Button className='pb-5' variant='h6' gutterbutton>
-              Partners
-            </Button>
-          </div>
+          {['About', 'Blog', 'Press', 'Jobs', 'Partners'].map((text) => (
+            <Typography
+              key={text}
+              sx={{
+                fontSize: { xs: '0.5rem', sm: '1rem', md: '1.1rem' },
+                mb: 1,
+              }}
+            >
+              <Link href="#" underline="hover" color="inherit">
+                {text}
+              </Link>
+            </Typography>
+          ))}
         </Grid>
-        <Grid item xs={12} sm={6} md={3}>
-          <Typography className='pb-5' variant='h6'>
+
+        {/* Documentation Section */}
+        <Grid item xs={12} sm={6} md={3} sx={{ textAlign: { xs: 'center', sm: 'left' } }}>
+          <Typography
+            variant="h6"
+            sx={{
+              mb: 2,
+              fontSize: { xs: '0.6rem', sm: '1.2rem', md: '1.4rem' },
+              fontWeight: 'bold',
+            }}
+          >
             Documentation
           </Typography>
-          <div>
-            <Button className='pb-5' variant='h6' gutterbutton>
-              Guides
-            </Button>
-          </div>
-          <div>
-            <Button className='pb-5' variant='h6' gutterbutton>
-              API Status
-            </Button>
-          </div>
+          {['Guides', 'API Status'].map((text) => (
+            <Typography
+              key={text}
+              sx={{
+                fontSize: { xs: '0.5rem', sm: '1rem', md: '1.1rem' },
+                mb: 1,
+              }}
+            >
+              <Link href="#" underline="hover" color="inherit">
+                {text}
+              </Link>
+            </Typography>
+          ))}
         </Grid>
-        <Grid item xs={12} sm={6} md={3}>
-          <Typography className='pb-5' variant='h6'>
+
+        {/* Solutions Section */}
+        <Grid item xs={12} sm={6} md={3} sx={{ textAlign: { xs: 'center', sm: 'left' } }}>
+          <Typography
+            variant="h6"
+            sx={{
+              mb: 2,
+              fontSize: { xs: '0.6rem', sm: '1.2rem', md: '1.4rem' },
+              fontWeight: 'bold',
+            }}
+          >
             Solutions
           </Typography>
-          <div>
-            <Button className='pb-5' variant='h6' gutterbutton>
-              Marketing
-            </Button>
-          </div>
-          <div>
-            <Button className='pb-5' variant='h6' gutterbutton>
-              Analytics
-            </Button>
-          </div>
-          <div>
-            <Button className='pb-5' variant='h6' gutterbutton>
-              Commerce
-            </Button>
-          </div>
-          <div>
-            <Button className='pb-5' variant='h6' gutterbutton>
-              Insights
-            </Button>
-          </div>
-          <div>
-            <Button className='pb-5' variant='h6' gutterbutton>
-              Support
-            </Button>
-          </div>
+          {['Marketing', 'Analytics', 'Commerce', 'Insights', 'Support'].map((text) => (
+            <Typography
+              key={text}
+              sx={{
+                fontSize: { xs: '0.5rem', sm: '1rem', md: '1.1rem' },
+                mb: 1,
+              }}
+            >
+              <Link href="#" underline="hover" color="inherit">
+                {text}
+              </Link>
+            </Typography>
+          ))}
         </Grid>
-        <Grid item xs={12} sm={6} md={3}>
-          <Typography className='pb-5' variant='h6'>
+
+        {/* Legal Section */}
+        <Grid item xs={12} sm={6} md={3} sx={{ textAlign: { xs: 'center', sm: 'left' } }}>
+          <Typography
+            variant="h6"
+            sx={{
+              mb: 2,
+              fontSize: { xs: '0.6rem', sm: '1.2rem', md: '1.4rem' },
+              fontWeight: 'bold',
+            }}
+          >
             Legal
           </Typography>
-          <div>
-            <Button className='pb-5' variant='h6' gutterbutton>
-              About
-            </Button>
-          </div>
-          <div>
-            <Button className='pb-5' variant='h6' gutterbutton>
-              Claims
-            </Button>
-          </div>
-          <div>
-            <Button className='pb-5' variant='h6' gutterbutton>
-              Privacy
-            </Button>
-          </div>
-          <div>
-            <Button className='pb-5' variant='h6' gutterbutton>
-              Terms
-            </Button>
-          </div>
+          {['About', 'Claims', 'Privacy', 'Terms'].map((text) => (
+            <Typography
+              key={text}
+              sx={{
+                fontSize: { xs: '0.5rem', sm: '1rem', md: '1.1rem' },
+                mb: 1,
+              }}
+            >
+              <Link href="#" underline="hover" color="inherit">
+                {text}
+              </Link>
+            </Typography>
+          ))}
         </Grid>
       </Grid>
 
-      {/* Center-aligned Footer Information */}
-      <Grid
-        item
-        xs={12}
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          textAlign: 'center', // Center align text
-          pt: 3 ,
-          pb: 5,
-          bgcolor:'#1c2b33',
-          color:'white',
-        
-        }}
-      >
-        <Typography variant="body2" component="p" sx={{ fontSize: '1rem' }}>
-          &copy;2023 My Company. All rights reserved.
+      {/* Bottom Footer */}
+      <Box sx={{ bgcolor: '#1c2b33', textAlign: 'center', py: 3 }}>
+        <Typography sx={{ fontSize: { xs: '0.8rem', sm: '0.9rem' } }}>
+          &copy; 2023 My Company. All rights reserved.
         </Typography>
-        <Typography variant="body2" component="p" sx={{ fontSize: '1rem' }}>
-          Made with love by me.
+        <Typography sx={{ fontSize: { xs: '0.8rem', sm: '0.9rem' } }}>
+          Keep scrolling, Keep smiling.
         </Typography>
-        <Typography variant="body2" component="p" sx={{ fontSize: '1rem' }}>
-          Icons made by{' '}
-          <Link href="https://www.freepik.com" color="inherit" underline="always">
+        <Typography sx={{ fontSize: { xs: '0.8rem', sm: '0.9rem' } }}>
+          Icons by{' '}
+          <Link href="https://www.freepik.com" underline="always" color="inherit">
             Freepik
           </Link>{' '}
           from{' '}
-          <Link href="https://www.flaticon.com" color="inherit" underline="always">
+          <Link href="https://www.flaticon.com" underline="always" color="inherit">
             www.flaticon.com
           </Link>
         </Typography>
-      </Grid>
-    </div>
+      </Box>
+    </Box>
   );
 };
 

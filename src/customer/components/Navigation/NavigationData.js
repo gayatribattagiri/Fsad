@@ -7,13 +7,13 @@ export const navigation = {
         {
           name: 'Fresh Picks',
           href: '#',
-          imageSrc: '/images/vegetables/fresh-picks.jpg',
+          imageSrc: '/images/tomatoes.jpg',
           imageAlt: 'Assorted fresh vegetables in a basket.',
         },
         {
           name: 'Organic',
           href: '#',
-          imageSrc: '/images/vegetables/organic.jpg',
+          imageSrc: '/images/spinach.jpg',
           imageAlt: 'Organic vegetables laid out on a table.',
         },
       ],

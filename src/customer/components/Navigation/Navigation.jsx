@@ -137,18 +137,19 @@ export default function Navigation() {
                         {category.sections.map((section) => (
                           <div key={section.name}>
                             <p className="font-medium text-gray-900">{section.name}</p>
-                            <ul className="mt-6 flex flex-col space-y-6">
-                              {section.items.map((item) => (
-                                <li key={item.name} className="flow-root">
-                                  <p
-                                    onClick={() => handleCategoryClick(category.id)}
-                                    className="cursor-pointer p-2 text-gray-500 hover:text-gray-800"
-                                  >
-                                    {item.name}
-                                  </p>
-                                </li>
-                              ))}
-                            </ul>
+                            <ul className="mt-4 grid grid-cols-1 gap-2">
+  {section.items.map((item) => (
+    <li key={item.name}>
+      <button
+        onClick={() => handleCategoryClick(category.id)}
+        className="w-full text-left px-4 py-2 rounded-md text-sm text-gray-700 bg-gray-50 hover:bg-gray-100 transition"
+      >
+        {item.name}
+      </button>
+    </li>
+  ))}
+</ul>
+
                           </div>
                         ))}
                       </Tab.Panel>
@@ -175,125 +176,128 @@ export default function Navigation() {
 
       {/* Desktop navigation */}
       <header className="relative bg-white">
-        <p className="flex h-12 items-center justify-center font-semibold bg-gradient-to-r from-[#7fb0d6] via-[#aacbe4] to-[#d4e5f2] text-[#1f2937] tracking-wide shadow-md">
-          Freshness Delivered, Happiness Guaranteed!
-        </p>
+ <p className="flex h-10 sm:h-12 items-center justify-center text-sm sm:text-base font-medium bg-gradient-to-r from-[#7fb0d6] via-[#aacbe4] to-[#d4e5f2] text-[#1f2937] tracking-wide shadow-md px-2 text-center">
+  Freshness Delivered, Happiness Guaranteed!
+</p>
 
-        <nav className="mx-auto">
-          <div className="border-b border-[#7fb0d6]">
-            <div className="flex h-16 items-center px-4">
-              <button
-                type="button"
-                onClick={() => setOpen(true)}
-                className="relative rounded-md bg-white p-2 text-gray-400 lg:hidden"
-              >
-                <Bars3Icon className="h-6 w-6" aria-hidden="true" />
-              </button>
 
-              {/* Logo */}
-              <div
-                onClick={() => navigate("/")}
-                className="ml-4 flex lg:ml-0 cursor-pointer"
-              >
-                <img
-                  alt="Your Company"
-                  src="./images/logo.png"
-                  className="h-10 w-auto"
-                />
-              </div>
+  <nav className="mx-auto">
+    <div className="border-b border-[#7fb0d6]">
+      <div className="flex h-16 items-center px-4">
+        <button
+          type="button"
+          onClick={() => setOpen(true)}
+          className="relative rounded-md bg-white p-2 text-gray-400 lg:hidden"
+        >
+          <Bars3Icon className="h-6 w-6" aria-hidden="true" />
+        </button>
 
-              {/* Categories */}
-              <div className="hidden lg:ml-8 lg:block lg:self-stretch">
-                <div className="flex h-full space-x-6">
-                  {navigation.categories.map((category) => (
-                    <Popover key={category.name} className="relative flex items-center">
-                      <Popover.Button className="flex items-center justify-center px-4 py-1 rounded-[20px] border-1 border-[#3e7089] bg-gradient-to-r from-[#7fb0d6] to-[#d4e5f2] text-sm font-medium text-gray-700 leading-none shadow-md hover:shadow-lg hover:text-gray-900">
-                        {category.name}
-                      </Popover.Button>
+        {/* Logo */}
+        <div
+          onClick={() => navigate("/")}
+          className="ml-4 flex lg:ml-0 cursor-pointer"
+        >
+          <img
+            alt="Your Company"
+            src="./images/logo.png"
+            className="h-10 w-auto"  // Ensures logo size is fixed
+          />
+        </div>
 
-                      <Transition
-                        as={Fragment}
-                        enter="transition ease-out duration-200"
-                        enterFrom="opacity-0 translate-y-1"
-                        enterTo="opacity-100 translate-y-0"
-                        leave="transition ease-in duration-150"
-                        leaveFrom="opacity-100 translate-y-0"
-                        leaveTo="opacity-0 translate-y-1"
-                      >
-                        <Popover.Panel className="absolute left-0 z-10 mt-3 w-screen max-w-md px-2 sm:px-0 top-full">
-                          {({ close }) => (
-                            <div className="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 overflow-hidden">
-                              <div className="relative grid gap-6 bg-gradient-to-r from-[#7fb0d6] to-[#d4e5f2] px-5 py-6 sm:gap-8 sm:p-8">
-                                {category.sections.map((section) => (
-                                  <div key={section.name}>
-                                    <p className="font-medium text-gray-900">{section.name}</p>
-                                    <ul className="mt-2 space-y-2">
-                                      {section.items.map((item) => (
-                                        <li key={item.name}>
-                                          <p
-                                            onClick={() => {
-                                              handleCategoryClick(category.id);
-                                              close();
-                                            }}
-                                            className="cursor-pointer text-gray-600 hover:text-gray-800"
-                                          >
-                                            {item.name}
-                                          </p>
-                                        </li>
-                                      ))}
-                                    </ul>
-                                  </div>
+        {/* Categories */}
+        <div className="hidden lg:ml-8 lg:block lg:self-stretch">
+          <div className="flex h-full space-x-6">
+            {navigation.categories.map((category) => (
+              <Popover key={category.name} className="relative flex items-center">
+                <Popover.Button className="flex items-center justify-center px-4 py-1 rounded-[20px] border-1 border-[#3e7089] bg-gradient-to-r from-[#7fb0d6] to-[#d4e5f2] text-sm font-medium text-gray-700 leading-none shadow-md hover:shadow-lg hover:text-gray-900">
+                  {category.name}
+                </Popover.Button>
+
+                <Transition
+                  as={Fragment}
+                  enter="transition ease-out duration-200"
+                  enterFrom="opacity-0 translate-y-1"
+                  enterTo="opacity-100 translate-y-0"
+                  leave="transition ease-in duration-150"
+                  leaveFrom="opacity-100 translate-y-0"
+                  leaveTo="opacity-0 translate-y-1"
+                >
+                  <Popover.Panel className="absolute left-0 z-10 mt-3 w-screen max-w-md px-2 sm:px-0 top-full">
+                    {({ close }) => (
+                      <div className="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 overflow-hidden">
+                        <div className="relative grid gap-6 bg-gradient-to-r from-[#7fb0d6] to-[#d4e5f2] px-5 py-6 sm:gap-8 sm:p-8">
+                          {category.sections.map((section) => (
+                            <div key={section.name}>
+                              <p className="font-medium text-gray-900">{section.name}</p>
+                              <ul className="mt-2 space-y-2">
+                                {section.items.map((item) => (
+                                  <li key={item.name}>
+                                    <p
+                                      onClick={() => {
+                                        handleCategoryClick(category.id);
+                                        close();
+                                      }}
+                                      className="cursor-pointer text-gray-600 hover:text-gray-800"
+                                    >
+                                      {item.name}
+                                    </p>
+                                  </li>
                                 ))}
-                              </div>
+                              </ul>
                             </div>
-                          )}
-                        </Popover.Panel>
-                      </Transition>
-                    </Popover>
-                  ))}
-                </div>
-              </div>
-
-              {/* Right icons */}
-              <div className="ml-auto flex items-center space-x-4">
-                {/* Custom Avatar */}
-                <>
-                  <Avatar
-                    src="/images/user.png"
-                    sx={{ cursor: "pointer", width: 40, height: 40 }}
-                    onClick={handleUserClick}
-                  />
-                  <Menu
-                    id="user-menu"
-                    anchorEl={anchorEl}
-                    open={openUserMenu}
-                    onClose={handleCloseUserMenu}
-                  >
-                    <MenuItem onClick={handleCloseUserMenu}>Profile</MenuItem>
-                    <MenuItem onClick={handleCloseUserMenu}>
-                      <Button onClick={() => navigate("/account/order")}>My Orders</Button>
-                    </MenuItem>
-                    <MenuItem onClick={handleCloseUserMenu}>Logout</MenuItem>
-                  </Menu>
-                </>
-
-                {/* Search */}
-                <button className="p-2 text-gray-400 hover:text-gray-500">
-                  <MagnifyingGlassIcon className="h-6 w-6" aria-hidden="true" />
-                </button>
-
-                {/* Cart Image */}
-                <img
-                  src="/images/cart.png"
-                  alt="Cart"
-                  onClick={handleCartClick} 
-                  className="h-9 w-9 cursor-pointer"
-                />
-              </div>
-            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </Popover.Panel>
+                </Transition>
+              </Popover>
+            ))}
           </div>
-        </nav>
-      </header>
+        </div>
+
+        {/* Right icons */}
+        <div className="ml-auto flex items-center space-x-4">
+          {/* Custom Avatar */}
+          <div className="flex items-center">
+            <Avatar
+              src="/images/user.png"
+              sx={{ cursor: "pointer", width: 30, height: 30 }} // smaller avatar for mobile
+              className="w-6 h-6 lg:w-8 lg:h-8" // Avatar icon size: smaller on mobile and larger on large screens
+              onClick={handleUserClick}
+            />
+            <Menu
+              id="user-menu"
+              anchorEl={anchorEl}
+              open={openUserMenu}
+              onClose={handleCloseUserMenu}
+            >
+              <MenuItem onClick={handleCloseUserMenu}>Profile</MenuItem>
+              <MenuItem onClick={handleCloseUserMenu}>
+                <Button onClick={() => navigate("/account/order")}>My Orders</Button>
+              </MenuItem>
+              <MenuItem onClick={handleCloseUserMenu}>Logout</MenuItem>
+            </Menu>
+          </div>
+
+          {/* Search */}
+          <button className="p-2 text-gray-400 hover:text-gray-500 w-8 h-9 lg:w-8 lg:h-8">
+            <MagnifyingGlassIcon className="h-6 w-6" aria-hidden="true" />
+          </button>
+
+          {/* Cart Image */}
+          <img
+            src="/images/cart.png"
+            alt="Cart"
+            onClick={handleCartClick} 
+            className="w-6 h-6 lg:w-8 lg:h-8 cursor-pointer" // Cart icon size: smaller on mobile and larger on large screens
+          />
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+
     </div>
   );
 }
