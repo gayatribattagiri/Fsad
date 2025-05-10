@@ -4,7 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 const ProductCard = ({ product }) => {
   const navigate = useNavigate();
-  const { categoryId } = useParams(); // dynamically grabs 'vegetables' or 'snacks'
+  const { categoryId } = useParams();
 
   const handleClick = () => {
     navigate(`/product/${categoryId}/${product.id}`);
