@@ -64,7 +64,7 @@ transform: 'translateX(50%) rotate(90deg)',
           <KeyboardArrowLeftIcon sx={{ transform: "rotate(+90deg)", color: 'black' }} />
         </Button>
 
-        {/* Left Arrow */}
+        {/* Left Arrow */}  
         <Button
           variant="contained"
           className="z-50"
@@ -75,7 +75,7 @@ transform: 'translateX(50%) rotate(90deg)',
             left: 0,
             transform: 'translateX(-50%) rotate(90deg)',
             bgcolor: 'white',
-          }}
+          }}  
           aria-label="prev"
         >
           <KeyboardArrowLeftIcon sx={{ transform: "rotate(-90deg)", color: 'black' }} />

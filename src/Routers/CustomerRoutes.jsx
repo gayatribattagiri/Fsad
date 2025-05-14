@@ -9,6 +9,8 @@ import ProductDetails from '../customer/components/ProductDetails/ProductDetails
 import Checkout from '../customer/components/Checkout/Checkout';
 import Order from '../customer/components/Order/Order';
 import OrderDetails from '../customer/components/Order/OrderDetails';
+import Signup from '../customer/components/Signup';
+import Login from '../customer/components/Login';
 
 const CustomerRoutes = () => {
   return (
@@ -18,7 +20,6 @@ const CustomerRoutes = () => {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/cart" element={<Cart />} />
-       
         <Route path="/product/:category/:productId" element={<ProductDetails />} />
 
         <Route path="/checkout" element={<Checkout/>}/>
@@ -26,8 +27,8 @@ const CustomerRoutes = () => {
         <Route path="/account/order/:orderId" element={<OrderDetails/>}/>
         <Route path="/products/:categoryId" element={<Product />} />
 
-       
-
+       <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
       </Routes>
 
       <Footer />
